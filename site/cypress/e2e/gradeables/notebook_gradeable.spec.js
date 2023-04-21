@@ -1,15 +1,15 @@
-describe('Tests cases revolving around gradeable access and submition', () => {
+describe('Tests cases revolving around notebook gradeable access and submition', () => {
     ['student','ta','instructor'].forEach((user) => {
         beforeEach(() => {
             cy.visit('/');
+            cy.login(user);
+            cy.visit([['development','gradeable','notebook_filesubmission']]);
         });
         it('Should upload file, submit, and remove file', () => {
             const testfile1 = 'cypress/fixtures/file1.txt';
             const testfile2 = 'cypress/fixtures/file2.txt';
             
-            cy.login(user);
-            cy.visit([['development','gradeable','notebook_filesubmission']]);
-
+            //Verify instructor given buttons doesn't give errors
             if (user === 'instructor'){
                 cy.get('#radio-student').click();
                 cy.get('#user-id-input').contains('user_id:');
@@ -29,12 +29,13 @@ describe('Tests cases revolving around gradeable access and submition', () => {
 
             cy.get('#content_6 > #CodeMirror-lines').type('cow');
 
-            cy.get('#upload2').selectFile(testfile1,{action: 'drag-drop'});
+            cy.get('#upload2').selectFile(testfile2,{action: 'drag-drop'});
             
             cy.waitPageChange(() => {
                 cy.get('#submit').click();
             });
-
+            cy.get('#submitted-files').contains('problem_2_house/file1.txt');
+            cy.get('#submitted-files').contains('problem_4_poetry/file2.txt');
 
         });
     });
