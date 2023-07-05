@@ -335,7 +335,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - uses: ./.github/workflows/vagrant_up.yaml
+      - uses: ./.github/actions/e2e-Setup-Composite
       # TODO: Remove this block after upgrading jsPDF
       - name: Cache Node Modules
         uses: actions/cache@v3
@@ -448,7 +448,7 @@ jobs:
       fail-fast: false
       matrix:
         # run copies of the current job in parallel
-        containers: [1]
+        containers: [1,2,3,4]
     services:
       postgres:
         image: postgres
@@ -467,7 +467,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - uses: ./.github/workflows/vagrant_up.yaml
+      - uses: ./.github/actions/e2e-Setup-Composite
       # TODO: Remove this block after upgrading jsPDF
       - name: Cache Node Modules
         uses: actions/cache@v3
