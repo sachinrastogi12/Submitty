@@ -317,12 +317,6 @@ jobs:
 
   e2eCypress_one:
     runs-on: ubuntu-20.04
-    strategy:
-      # don't fail the entire matrix on failure
-      fail-fast: false
-      matrix:
-        # run copies of the current job in parallel
-        containers: [1]
     services:
       postgres:
         image: postgres
@@ -341,7 +335,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - uses: ./.github/actions/e2e-Setup-Composite
+      - uses: ./.github/workflows/vagrant_up.yaml
       # TODO: Remove this block after upgrading jsPDF
       - name: Cache Node Modules
         uses: actions/cache@v3
@@ -473,7 +467,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - uses: ./.github/actions/e2e-Setup-Composite
+      - uses: ./.github/workflows/vagrant_up.yaml
       # TODO: Remove this block after upgrading jsPDF
       - name: Cache Node Modules
         uses: actions/cache@v3
