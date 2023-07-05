@@ -316,6 +316,7 @@ jobs:
         run: sudo bash tests/test_site_error_log.sh
 
   e2eCypress:
+  
     runs-on: ubuntu-20.04
     strategy:
       # don't fail the entire matrix on failure
@@ -370,7 +371,14 @@ jobs:
           working-directory: ${{env.SUBMITTY_REPOSITORY}}/site
           browser: chrome
           env: run_area=CI
-          parallel: True
+          record: true
+          parallel: true # Runs test in parallel using settings above
+      - env:
+          # For recording and parallelization to work you must set your CYPRESS_RECORD_KEY
+          # in GitHub repo → Settings → Secrets → Actions
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          # Creating a token https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Stop autograding services
         run: |
