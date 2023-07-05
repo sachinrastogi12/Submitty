@@ -14,6 +14,6 @@ export default defineConfig({
     },
     baseUrl: 'http://localhost:1511',
     specPattern: 'cypress/e2e/**/*.spec.js',
-    projectId: 'SubmittyCI'
+    projectId: '9dqyzq'
   },
 })
