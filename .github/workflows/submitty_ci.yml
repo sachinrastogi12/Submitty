@@ -317,6 +317,12 @@ jobs:
 
   e2eCypress:
     runs-on: ubuntu-20.04
+    strategy:
+      # don't fail the entire matrix on failure
+      fail-fast: false
+      matrix:
+        # run copies of the current job in parallel
+        containers: [1, 2, 3, 4, 5]
     services:
       postgres:
         image: postgres
@@ -364,6 +370,7 @@ jobs:
           working-directory: ${{env.SUBMITTY_REPOSITORY}}/site
           browser: chrome
           env: run_area=CI
+          parallel: True
 
       - name: Stop autograding services
         run: |
