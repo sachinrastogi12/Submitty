@@ -19,7 +19,7 @@ describe('Test cases revolving around simple grading lab', () => {
                 else if (initialValue === '1') {
                     cy.get('#cell-1-0-0').should('have.attr', 'data-score', '0.5');
                 }
-            });
+            }); 
             // Check Settings Tab
             cy.get('#settings-btn').click({force: true});
             cy.get('#settings-popup').should('have.attr','style','');
