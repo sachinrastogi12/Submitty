@@ -446,7 +446,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - uses: ./.github/actions/e2e-Setup-Composite
+      # - uses: ./.github/actions/e2e-Setup-Composite
       # TODO: Remove this block after upgrading jsPDF
       - name: Cache Node Modules
         uses: actions/cache@v3
@@ -473,7 +473,7 @@ jobs:
           record: true
           parallel: true  # Runs test in parallel using settings above
         env:
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEYs }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COMMIT_INFO_MESSAGE: ${{github.event.pull_request.title}}
 
