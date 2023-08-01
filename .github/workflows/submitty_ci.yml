@@ -477,7 +477,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COMMIT_INFO_MESSAGE: ${{github.event.pull_request.title}}
 
-      - name: Ensure cypress has run:
+      - name: Ensure cypress has run in CI
         run: echo "Cypress has sucessfully ran in CI"
         if: success()
 
