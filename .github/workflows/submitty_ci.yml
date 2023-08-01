@@ -477,6 +477,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COMMIT_INFO_MESSAGE: ${{github.event.pull_request.title}}
 
+      - name: Ensure cypress has run:
+        run: echo "Cypress has sucessfully ran in CI"
+        if: success()
+
+
       - name: Check for site errors
         working-directory: ${{ env.SUBMITTY_REPOSITORY }}
         run: sudo bash tests/test_site_error_log.sh
